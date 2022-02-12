@@ -39,7 +39,43 @@ var auditEvent = function(eventEl) {
     }
 }
 
+var createEvent = function(eventText, hour) {
+    var timeBlock = $("<div>").addClass("timeblock");
+    var eventP = $("<p>").addClass("event").text(eventText);
+    timeBlock.append(eventP);
 
+    $(hour).append(timeBlock);
+}
+
+// Load events
+var loadEvents = function() {
+    events = JSON.parse(localStorage.getItem("events"));
+
+    if (!events) {
+        events = {
+            9: [],
+            10: [],
+            11: [],
+            12: [],
+            13: [],
+            14: [],
+            15: [],
+            16:[],
+            17: []
+        };
+    }
+
+    $.each(events, function (hour, events) {
+        events.forEach(function(thisEvent) {
+            createEvent(thisEvent.text, hour);
+        });
+    });
+}
+
+// Save events
+var saveEvents = function() {
+    localStorage.setItem("events", JSON.stringify(events));
+};
 
 // Display current date
 $("#currentDay").text(currentDate);
@@ -66,12 +102,14 @@ $(".timeblock").on("blur", "textarea", function() {
     var status = $(this).closest(".timeblock").attr("id");
 
     events[status].text = text;
-    //saveEvents;
+    saveEvents();
 
     var eventP = $("<p>").addClass("event").text(text);
 
-    $(this).replaceWith(evenP);
+    $(this).replaceWith(eventP);
 });
+
+loadEvents();
 
 // Check hour periodically
 $(".timeblock").each(function(index, el) {
