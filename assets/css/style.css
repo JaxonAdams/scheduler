@@ -99,6 +99,7 @@ textarea{
 .event {
   font-size: 1.25rem;
   padding: 0 auto;
+  padding-top: 0.8rem;
 }
 
 .event-hour {
