@@ -2,15 +2,19 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  box-sizing: border-box;
 }
 
-textarea{
+textarea, .event {
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
   padding: 10px;
+  font-size: 1.25rem;
+  text-align: center;
+  width: 80%;
+  float: left;
 }
 
 .jumbotron {
@@ -36,10 +40,9 @@ textarea{
   border-top: 1px solid white;;
 }
 
-.hour {
+.hour, .event-hour {
   background-color: #ffffff;
   color: #000000;
-  border-top: 1px dashed #000000;
 }
 
 .past {
@@ -75,6 +78,7 @@ textarea{
 
 .timeblock-container {
   margin: 0 1.5rem;
+  align-items: center;
 }
 
 .timeblock {
@@ -84,10 +88,6 @@ textarea{
   width: 90%;
   float: left;
   padding: .85rem 2rem;
-}
-
-.event-hour-lg {
-  padding-left: .9rem;
 }
 
 .btn-container {
@@ -100,9 +100,13 @@ textarea{
   font-size: 1.25rem;
   padding: 0 auto;
   padding-top: 0.8rem;
+  text-align: center;
+  float: left;
 }
 
 .event-hour {
   font-size: 1.5rem;
   font-weight: bold;
+  float: left;
+  width: 10%;
 }
