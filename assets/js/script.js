@@ -79,9 +79,9 @@ $(".timeblock").each(function(index, el) {
     console.log(el);
   });
 
-  setInterval(function() {
+setInterval(function() {
     $(".timeblock").each(function(index, el) {
         auditEvent(el);
         console.log(el);
       });
-  }, (1000 * 60) * 60);
+}, (1000 * 60) * 60);
