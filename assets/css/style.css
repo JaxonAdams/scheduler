@@ -63,9 +63,45 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  height: 80px;
+  width: 100%;
+  padding: 0 auto;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.timeblock-container {
+  margin: 0 1.5rem;
+}
+
+.timeblock {
+  border: 3px solid #444;
+  margin-bottom: .5rem;
+  height: 80px;
+  width: 90%;
+  float: left;
+  padding: .85rem 2rem;
+}
+
+.event-hour-lg {
+  padding-left: .9rem;
+}
+
+.btn-container {
+  width: 10%;
+  height: 100%;
+  float: left;
+}
+
+.event {
+  font-size: 1.25rem;
+  padding: 0 auto;
+}
+
+.event-hour {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
