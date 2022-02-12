@@ -1,5 +1,7 @@
 var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
+
+
 // Display current date
 $("#currentDay").text(currentDate);
 
