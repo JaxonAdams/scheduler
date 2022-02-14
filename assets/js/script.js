@@ -2,11 +2,7 @@ var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 var currentHour = moment();
 var timeblock = document.querySelector(".timeblock");
 var timeblockContainer = document.querySelector(".timeblock-container");
-
-// Set background color
-var setColor = function (element, color) {
-    element.style.backgroundColor = color;
-  }
+var events = {};
 
 // Define auditEvent function
 var auditEvent = function(eventEl) {
@@ -28,8 +24,6 @@ var auditEvent = function(eventEl) {
 
     $(eventEl).removeClass("past present future");
 
-    console.log(currentHour, momentObj);
-
     if (moment(currentHour, "hour").isSame(momentObj)) {
         $(eventEl).addClass("present");
     } else if (moment(currentHour, "hour").isAfter(momentObj)) {
@@ -39,13 +33,36 @@ var auditEvent = function(eventEl) {
     }
 }
 
-var createEvent = function(eventText, hour) {
-    var timeBlock = $("<div>").addClass("timeblock");
-    var eventP = $("<p>").addClass("event").text(eventText);
-    timeBlock.append(eventP);
+// Load and Save functions
 
-    $(hour).append(timeBlock);
+var loadEvents = function() {
+    events = JSON.parse(localStorage.getItem("events"));
+
+    if (!events) {
+        events = {
+            9: [],
+            10: [],
+            11: [],
+            12: [],
+            13: [],
+            14: [],
+            15: [],
+            16: [],
+            17: []
+        };
+    }
+
+    $.each(events, function(thisHour, events) {
+        events.forEach(function(event) {
+
+        });
+    });
 }
+
+var saveEvents = function() {
+    localStorage.setItem("events", JSON.stringify(events));
+}
+
 
 // Load events
 var loadEvents = function() {
@@ -99,10 +116,10 @@ $(".timeblock").on("click", "p", function() {
 $(".timeblock").on("blur", "textarea", function() {
     var text = $(this).text().trim();
 
-    var status = $(this).closest(".timeblock").attr("id");
+    var eventHour = $(this).closest(".timeblock").attr("id");
 
-    events[status].text = text;
-    saveEvents();
+    events[eventHour].text = text;
+    //saveEvents();
 
     var eventP = $("<p>").addClass("event").text(text);
 
@@ -114,8 +131,14 @@ loadEvents();
 // Check hour periodically
 $(".timeblock").each(function(index, el) {
     auditEvent(el);
-    console.log(el);
-  });
+});
+
+// Save button
+$(".saveBtn").on("click", function() {
+    var eventDescription = $("#event-description").val();
+    
+
+});
 
 setInterval(function() {
     $(".timeblock").each(function(index, el) {
