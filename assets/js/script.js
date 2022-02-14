@@ -35,63 +35,87 @@ var auditEvent = function(eventEl) {
 
 // Load and Save functions
 
+// Get events
+var getEvent9 = function() {
+    return localStorage.getItem("9");
+};
+
+var getEvent10 = function() {
+    return localStorage.getItem("10");
+};
+
+var getEvent11 = function() {
+    return localStorage.getItem("11");
+};
+
+var getEvent12 = function() {
+    return localStorage.getItem("12");
+};
+
+var getEvent13 = function() {
+    return localStorage.getItem("13");
+};
+
+var getEvent14 = function() {
+    return localStorage.getItem("14");
+};
+
+var getEvent15 = function() {
+    return localStorage.getItem("15");
+};
+
+var getEvent16 = function() {
+    return localStorage.getItem("16");
+};
+
+var getEvent17 = function() {
+    return localStorage.getItem("17");
+};
+
+// Load Events
 var loadEvents = function() {
-    events = JSON.parse(localStorage.getItem("events"));
+    var event9 = getEvent9();
+    var event10 = getEvent10();
+    var event11 = getEvent11();
+    var event12 = getEvent12();
+    var event13 = getEvent13();
+    var event14 = getEvent14();
+    var event15 = getEvent15();
+    var event16 = getEvent16();
+    var event17 = getEvent17();
 
-    if (!events) {
-        events = {
-            9: [],
-            10: [],
-            11: [],
-            12: [],
-            13: [],
-            14: [],
-            15: [],
-            16: [],
-            17: []
-        };
-    }
-
-    $.each(events, function(thisHour, events) {
-        events.forEach(function(event) {
-
-        });
-    });
-}
-
-var saveEvents = function() {
-    localStorage.setItem("events", JSON.stringify(events));
-}
-
-
-// Load events
-var loadEvents = function() {
-    events = JSON.parse(localStorage.getItem("events"));
-
-    if (!events) {
-        events = {
-            9: [],
-            10: [],
-            11: [],
-            12: [],
-            13: [],
-            14: [],
-            15: [],
-            16:[],
-            17: []
-        };
-    }
-
-    $.each(events, function (hour, events) {
-        events.forEach(function(thisEvent) {
-            createEvent(thisEvent.text, hour);
-        });
-    });
+    $("#event-description9").text(event9);
+    $("#event-discription10").text(event10);
+    $("#event-discription11").text(event11);
+    $("#event-discription12").text(event12);
+    $("#event-discription13").text(event13);
+    $("#event-discription14").text(event14);
+    $("#event-discription15").text(event15);
+    $("#event-discription16").text(event16);
+    $("#event-discription17").text(event17);
 }
 
 // Save events
 var saveEvents = function() {
-    localStorage.setItem("events", JSON.stringify(events));
+    var thisEvent9 = $("#event-description9").text();
+    var thisEvent10 = $("#event-description10").text();
+    var thisEvent11 = $("#event-description11").text();
+    var thisEvent12 = $("#event-description12").text();
+    var thisEvent13 = $("#event-description13").text();
+    var thisEvent14 = $("#event-description14").text();
+    var thisEvent15 = $("#event-description15").text();
+    var thisEvent16 = $("#event-description16").text();
+    var thisEvent17 = $("#event-description17").text();
+
+    localStorage.setItem("9", thisEvent9);
+    localStorage.setItem("10", thisEvent10);
+    localStorage.setItem("11", thisEvent11);
+    localStorage.setItem("12", thisEvent12);
+    localStorage.setItem("13", thisEvent13);
+    localStorage.setItem("14", thisEvent14);
+    localStorage.setItem("15", thisEvent15);
+    localStorage.setItem("16", thisEvent16);
+    localStorage.setItem("17", thisEvent17);
 };
 
 // Display current date
@@ -114,19 +138,16 @@ $(".timeblock").on("click", "p", function() {
 });
 
 $(".timeblock").on("blur", "textarea", function() {
-    var text = $(this).text().trim();
-
-    var eventHour = $(this).closest(".timeblock").attr("id");
+    var text = $(this).val().trim();
+    var eventHour = $(this).closest(".timeblockContainer").attr("id");
 
     events[eventHour].text = text;
-    //saveEvents();
+    saveEvents();
 
     var eventP = $("<p>").addClass("event").text(text);
 
     $(this).replaceWith(eventP);
 });
-
-loadEvents();
 
 // Check hour periodically
 $(".timeblock").each(function(index, el) {
@@ -135,9 +156,7 @@ $(".timeblock").each(function(index, el) {
 
 // Save button
 $(".saveBtn").on("click", function() {
-    var eventDescription = $("#event-description").val();
-    
-
+    saveEvents();
 });
 
 setInterval(function() {
@@ -146,3 +165,5 @@ setInterval(function() {
         console.log(el);
       });
 }, (1000 * 60) * 60);
+
+loadEvents();
